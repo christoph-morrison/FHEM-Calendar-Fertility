@@ -15,7 +15,7 @@ set -o errexit
 trap "" INT TERM EXIT
 
 LIBRARY_DIR="/vagrant/deployment/"
-LOCALE="de_DE.UTF-8"
+LOCALE="de_DE.utf8"
 
 function install_puppet {
     puppet_source="https://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb"
@@ -95,25 +95,25 @@ function set_locale {
     echo Setup locale   
     
     echo  "${locale} UTF-8" > /etc/locale.gen
-    locale-gen ${locale}
+    sudo locale-gen ${locale}
     
-    export LC_ALL="${locale}"
-    echo Would export LC_ALL="${locale}"
+    #export LC_ALL="${locale}"
+    #echo Would export LC_ALL="${locale}"
 
-    export LANG="${locale}"
-    echo Would export LANG="${locale}"
+    #export LANG="${locale}"
+    #echo Would export LANG="${locale}"
 
-    export LANGUAGE="${locale}"
-    echo Would export LANGUAGE="${locale}"
+    #export LANGUAGE="${locale}"
+    #echo Would export LANGUAGE="${locale}"
         
     # update locale
-    echo "LANG=${locale}" > /etc/default/locale
-    echo "/etc/default/locale:";
-    cat /etc/default/locale
+    #echo "LANG=${locale}" > /etc/default/locale
+    #echo "/etc/default/locale:";
+    #cat /etc/default/locale
 
-    update-locale LANG="${locale}"
-    update-locale LANGUAGE="${locale}"
-    update-locale LC_ALL="${locale}"
+    sudo update-locale LANG="${locale}"
+    sudo update-locale LANGUAGE="${locale}"
+    sudo update-locale LC_ALL="${locale}"
     
     # disable sshd's annoying LC_* copy
     sed -e '/AcceptEnv/ s/^#*/#/' -i /etc/ssh/sshd_config

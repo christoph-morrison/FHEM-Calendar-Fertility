@@ -14,9 +14,14 @@ Vagrant.configure("2") do |config|
         machine.vm.box = "debian/contrib-stretch64"
         machine.vm.hostname = "fhem-ovulation-calendar"
 
-        machine.vm.network "public_network", bridge: "en0: WLAN (AirPort)"
+        machine.vm.network "public_network", bridge: [
+            "en0: WLAN (AirPort)",
+            "en0: Ethernet"
+        ]
+
+        # mount for later created user "fhem" with later uid 999
         machine.vm.synced_folder ".", "/vagrant",
-            owner: "fhem", group: "dialout"
+            owner: "999", group: "dialout"
 
         machine.vm.provider "virtualbox" do |v|
             # Customize the amount of memory on the VM:
