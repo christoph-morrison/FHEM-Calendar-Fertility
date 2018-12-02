@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
         # mount for later created user "fhem" with later uid 999
         machine.vm.synced_folder ".", "/vagrant",
-            owner: "999", group: "dialout"
+            owner: "998", group: "dialout"
 
         machine.vm.provider "virtualbox" do |v|
             # Customize the amount of memory on the VM:
